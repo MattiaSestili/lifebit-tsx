@@ -1,8 +1,9 @@
 import * as React from "react";
-import { Container, Jumbotron } from "react-bootstrap";
+import { Container, Jumbotron, Row } from "react-bootstrap";
 import { Home } from "./Components/Home";
 import { MoviePage } from "./Components/MoviePage";
 import { SearchForm } from "./Components/SearchToolbar";
+import whatsLogo from "./Logos/logo.svg"
 
 interface IRating {
   Source: string,
@@ -74,6 +75,10 @@ export const MovieContainer = () => {
   return (
     <Jumbotron fluid style={{ background: "#0a1014" }}>
       <Container>
+        <Row style={{ marginBottom: 16 }}>
+          <img src={whatsLogo} alt="logo" />
+        </Row>
+
         {body}
       </Container>
     </Jumbotron>
