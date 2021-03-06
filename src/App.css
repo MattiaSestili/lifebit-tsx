@@ -52,3 +52,42 @@
 .search-bar-movies::placeholder {
    color: #7a8c99;
 }
+
+.dark-favorite-btn {
+  border-color: rgb(27, 35, 41);
+    padding-right: 12px;
+    padding-left: 16px;
+    padding-bottom: 12px;
+    font-family: 'Roboto';
+    font-size: 16px;
+}
+
+.btn-favorite {
+  margin-left: 16px;
+  height: 2.4rem;
+}
+
+.dark-favorite-btn:hover {
+  border-color: #ff4040 !important;
+  background: transparent !important;
+}
+
+.dark-favorite-btn:hover > img {
+  content: url(Icons/icon-heart-white.svg) !important;
+}
+
+.dark-favorite-btn-active {
+  background-color:  #ff4040  !important;
+  color: white !important;
+}
+
+.dark-favorite-btn-active:focus {
+ background-color: #ff4040  !important;
+ border-color: transparent !important;
+}
+
+.dark-favorite-btn:active { 
+  background-color:  #ff4040  !important;
+  color: white !important;
+  content: url(Icons/icon-heart-full.svg) !important;
+}

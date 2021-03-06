@@ -11,8 +11,7 @@ export interface SearchForm {
 export const SearchToolbar = (props: { SearchMovie: (searchForm: SearchForm) => void }) => {
   const [searchForm, setSearch] = React.useState<SearchForm>({
     Title: "",
-    Year: "",
-
+    Year: ""
   })
 
   const _onSubmit = (e: React.FormEvent<HTMLFormElement>) => {

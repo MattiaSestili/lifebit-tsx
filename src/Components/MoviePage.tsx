@@ -1,17 +1,19 @@
 import * as React from "react";
-import { Col, FormControl, Image, InputGroup, Row } from "react-bootstrap";
-import { IMovie } from "../MovieContainer";
+import { Button, ButtonGroup, Col, FormControl, Image, InputGroup, Row } from "react-bootstrap";
+import { IMovieList } from "../MovieContainer";
 import arrowGrey from "../Icons/icon-arrow-grey.svg"
 import emptyImagePng from "../Illustrations/illustration-empty-state.png"
+import heartGreySVG from "../Icons/icon-heart-grey.svg"
+import fullHeartSVG from "../Icons/icon-heart-full.svg"
 
 //NB: this svg is black!!!!
 // import imbdLogo from "../Logos/logo-imdb.svg"
 import rottenTomatoes from "../Logos/logo-rotten-tomatoes.svg"
 
-export const MoviePage = (props: { Movie: IMovie; GoBack: () => void }) => {
-  const actors = props.Movie.Actors.split(",");
-  const genre = props.Movie.Genre.split(",")
-  const directors = props.Movie.Director.split(",")
+export const MoviePage = (props: { MovieList: IMovieList; GoBack: () => void; AddToFavorite: () => void }) => {
+  const actors = props.MovieList.Movie.Actors.split(",");
+  const genre = props.MovieList.Movie.Genre.split(",")
+  const directors = props.MovieList.Movie.Director.split(",")
 
   return (
     <Row>
@@ -21,11 +23,11 @@ export const MoviePage = (props: { Movie: IMovie; GoBack: () => void }) => {
 
       <Row>
         <Col xs="auto" sm={8}>
-          {props.Movie && (
+          {props.MovieList && (
             <>
               <Row>
                 <Col sm={12}>
-                  <div className="duration-rated">{props.Movie.Runtime + " • " + props.Movie.Year + " • "}
+                  <div className="duration-rated">{props.MovieList.Movie.Runtime + " • " + props.MovieList.Movie.Year + " • "}
                     <span>R</span>
                   </div>
                 </Col>
@@ -33,7 +35,7 @@ export const MoviePage = (props: { Movie: IMovie; GoBack: () => void }) => {
 
               <Row>
                 <Col sm={12}>
-                  <div className="bold-movie-title">{props.Movie.Title}</div>
+                  <div className="bold-movie-title">{props.MovieList.Movie.Title}</div>
                 </Col>
               </Row>
 
@@ -53,7 +55,7 @@ export const MoviePage = (props: { Movie: IMovie; GoBack: () => void }) => {
                         padding: 8
                       }}
                       readOnly={true}
-                      value={props.Movie.Ratings.find(r => r.Source === "Internet Movie Database")?.Value ?? ""}
+                      value={props.MovieList.Movie.Ratings.find(r => r.Source === "Internet Movie Database")?.Value ?? ""}
                     />
                   </InputGroup>
                 </div>
@@ -73,16 +75,26 @@ export const MoviePage = (props: { Movie: IMovie; GoBack: () => void }) => {
                         padding: 8
                       }}
                       readOnly={true}
-                      value={props.Movie.Ratings.find(r => r.Source === "Rotten Tomatoes")?.Value ?? ""}
+                      value={props.MovieList.Movie.Ratings.find(r => r.Source === "Rotten Tomatoes")?.Value ?? ""}
                     />
                   </InputGroup>
                 </div>
+
+                <ButtonGroup className="btn-favorite">
+                  {props.MovieList.Favorite ?
+                    <Button className="dark-favorite-btn-active" onClick={props.AddToFavorite}>
+                      <img src={fullHeartSVG} alt="icon" /> &nbsp;&nbsp;Added
+                  </Button>
+                    : <Button className={"dark-favorite-btn"} variant="outline-dark" onClick={props.AddToFavorite}>
+                      <img src={heartGreySVG} alt="icon" /> &nbsp;&nbsp; Add to favorite
+                  </Button>}
+                </ButtonGroup>
               </Row>
 
               <Row>
                 <Col>
                   <p className="details-title">Plot</p>
-                  <p style={{ color: "white" }}>{props.Movie.Plot}</p>
+                  <p style={{ color: "white" }}>{props.MovieList.Movie.Plot}</p>
                 </Col>
               </Row>
 
@@ -127,9 +139,9 @@ export const MoviePage = (props: { Movie: IMovie; GoBack: () => void }) => {
         </Col>
 
         <Col xs="auto" sm={4}>
-          <Image src={props.Movie?.Poster ?? emptyImagePng} fluid />
+          <Image src={props.MovieList?.Movie.Poster ?? emptyImagePng} width={"100%"} />
         </Col>
       </Row>
-    </Row>
+    </Row >
   );
 }
